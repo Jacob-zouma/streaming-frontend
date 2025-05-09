@@ -1,66 +1,62 @@
+// src/components/UploadForm.jsx
 import { useState } from "react";
-import axios from "axios";
 
-export default function UploadForm() {
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    videoUrl: "",
-    isPremium: false,
-  });
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
+const UploadForm = () => {
+  const [title, setTitle] = useState("");
+  const [file, setFile] = useState(null);
+  const [message, setMessage] = useState("");
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    setMessage("");
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("video", file);
+
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/videos`, form, {
-        headers: { Authorization: `Bearer ${token}` },
+      const res = await fetch(`${apiUrl}/upload`, {
+        method: "POST",
+        body: formData,
       });
-      alert("Vidéo uploadée !");
+
+      if (!res.ok) throw new Error(`Erreur : ${res.status}`);
+      const data = await res.json();
+      setMessage(`✅ Vidéo "${data.title}" envoyée avec succès !`);
+      setTitle("");
+      setFile(null);
     } catch (err) {
-      alert("Erreur lors de l'upload");
+      setMessage(`❌ Erreur : ${err.message}`);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Uploader une vidéo</h2>
+    <form onSubmit={handleSubmit} className="space-y-4">
       <input
-        name="title"
-        value={form.title}
-        onChange={handleChange}
-        placeholder="Titre"
+        type="text"
+        placeholder="Titre de la vidéo"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="border p-2 w-full"
+        required
       />
       <input
-        name="description"
-        value={form.description}
-        onChange={handleChange}
-        placeholder="Description"
+        type="file"
+        accept="video/*"
+        onChange={(e) => setFile(e.target.files[0])}
+        className="border p-2 w-full"
+        required
       />
-      <input
-        name="videoUrl"
-        value={form.videoUrl}
-        onChange={handleChange}
-        placeholder="URL vidéo"
-      />
-      <label>
-        Premium ?
-        <input
-          type="checkbox"
-          name="isPremium"
-          checked={form.isPremium}
-          onChange={handleChange}
-        />
-      </label>
-      <button type="submit">Envoyer</button>
+      <button
+        type="submit"
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Envoyer
+      </button>
+      {message && <p>{message}</p>}
     </form>
   );
-}
+};
+
+export default UploadForm;
