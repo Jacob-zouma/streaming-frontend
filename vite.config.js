@@ -7,4 +7,9 @@ export default defineConfig({
   build: {
     outDir: "dist", // <- important pour Netlify
   },
+  resolve: {
+    alias: {
+      "@": "/src", // L'alias '@' pointe vers '/src'
+    },
+  },
 });

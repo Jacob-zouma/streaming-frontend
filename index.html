@@ -1,13 +1,988 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>The Future of Streaming</title>
+    
+   
+
+<!-- JS pagination -->
+<script src="/src/components/pagination.js" type="module"></script>
+
+<!-- CSS pagination -->
+<link rel="stylesheet" href="/src/css/pagination.css" />
+
+<!-- CSS global -->
+<link rel="stylesheet" href="/src/css/global.css" />
+
+<!-- Fancybox CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+
+<!-- Fancybox JS -->
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5/dist/fancybox/fancybox.umd.js"></script>
+
+<!-- Favicon -->
+<!-- <link rel="icon" href="/images/logo/2a047ca5-f1a1-4e0d-9b40-769fca026232.jpg" /> -->
+ <!-- L'icone de la page sur le navigateur -->
+ <link rel="icon" href="/images/logement/newa/bg_11.webp" />
+
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@400;600&display=swap"
+  rel="stylesheet"
+/>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- EmailJS -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<!-- GSAP Scroll Animation -->
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+<!-- FontAwesome -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+<!-- CSS global dans styles (si utilisé ailleurs aussi) -->
+<link rel="stylesheet" href="/src/styles/global.css" />
+
+<!-- CSS pour composants pagination (alternative à /css/pagination.css si déplacé) -->
+<link rel="stylesheet" href="/src/components/pagination.css" />
+
+    
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+  <body class="dark-mode">
+    <div id="root">
+    <!-- preload -->
+     <div id="preloader">
+  <div class="spinner"></div>
+  <p class="loading-text">Chargement en cours...</p>
+  <div class="preloader-glow"></div>
+</div>
+
+
+
+    <div class="menu-overlay" onclick="closeMenu()"></div>
+    <!-- Effet de halo -->
+    <div class="glow-effect"></div>
+    <!-- Fond SVG animé -->
+    <div class="background-svg">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path
+          fill="#00c8ff33"
+          d="M0,160L40,154.7C80,149,160,139,240,122.7C320,107,400,85,480,85.3C560,85,640,107,720,138.7C800,171,880,213,960,224C1040,235,1120,213,1200,176C1280,139,1360,85,1400,58.7L1440,32L1440,320L0,320Z"
+        >
+          <animate
+            attributeName="d"
+            dur="10s"
+            repeatCount="indefinite"
+            values="
+            M0,160L40,154.7C80,149,160,139,240,122.7C320,107,400,85,480,85.3C560,85,640,107,720,138.7C800,171,880,213,960,224C1040,235,1120,213,1200,176C1280,139,1360,85,1400,58.7L1440,32L1440,320L0,320Z;
+            M0,120L40,144C80,168,160,216,240,208C320,200,400,136,480,122.7C560,107,640,149,720,181.3C800,213,880,235,960,218.7C1040,203,1120,149,1200,117.3C1280,85,1360,75,1400,69.3L1440,64L1440,320L0,320Z;
+            M0,160L40,154.7C80,149,160,139,240,122.7C320,107,400,85,480,85.3C560,85,640,107,720,138.7C800,171,880,213,960,224C1040,235,1120,213,1200,176C1280,139,1360,85,1400,58.7L1440,32L1440,320L0,320Z;
+          "
+          />
+        </path>
+      </svg>
+    </div>
+    <!-- Points -->
+    <div class="dots-grid"></div>
+
+    <!-- Contenu principal -->
+    <div class="container">
+      
+       <!-- La barre de navigation -->
+<!-- La barre de navigation -->
+<nav class="navbar" id="navbar">
+    <div class="navbar-container">
+
+        <!-- Logo -->
+        <div class="logo">
+            <a href="#">
+                <h4 class="company-name">Ginyard <span>International Co.</span></h4>
+            </a>
+        </div>
+
+        <!-- Menu -->
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#">Accueil</a></li>
+            <li class="dropdown">
+                <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">MMORPG</a></li>
+                    <li><a href="#">FPS</a></li>
+                    <li><a href="#">MOBA</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Tournois</a></li>
+            <li><a href="#">Équipe</a></li>
+            <li><a href="#contact-section">Contact</a></li>
+        </ul>
+
+        <!-- Login button -->
+        <div class="nav-btns">
+            <a href="#" class="login-btn">Connexion</a>
+        </div>
+
+        <!-- Recherche + Filtrage -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Rechercher rapide...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <!-- Icone de recherche (mobile) -->
+        <div class="search-icon" id="search-icon">
+            <i class="fas fa-search"></i>
+        </div>
+
+        <!-- Hamburger (menu mobile) -->
+        <div class="hamburger" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- Fond semi-transparent -->
+<div id="menu-overlay"></div>
+
+
+
+
+<!-- L'audio -->
+ <audio id="error-sound" src="/public/music/button-1.wav" preload="auto"></audio>  <!-- Chemin vers le fichier sonore -->
+
+
+  
+
+       <main>
+         <!-- La  1e section de la page-->
+         <section class="hautSection">
+  <article class="gaucheSec gauche">
+    <h1>
+      <span class="highlight">L'AVENIR DES</span><br />
+      <span class="blue-text">PLATEFORMES DE STREAMING</span>
+    </h1>
+    <p class="subtitle">Explorer les tendances, les défis et les innovations</p>
+    <div class="buttons">
+      <a href="#" class="button">www.reallygreatsite.com</a>
+      <a href="#" class="button">@reallygreatsite</a>
+    </div>
+  </article>
+
+  <article class="droiteSec droite">
+    <img src="/public/images/numeriques/num_10.png" alt="">
+  </article>
+  <style>
+    .hautSection {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 100%;
+  height: 90vh;
+  align-items: center;
+  padding: 1rem;
+}
+
+.hautSection .gaucheSec {
+  flex: 1;
+}
+
+.hautSection .droiteSec img {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
+}
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .hautSection {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .hautSection .droiteSec img {
+    height: 50vh;
+  }
+}
+
+/* Téléphone */
+@media (max-width: 600px) {
+  .hautSection {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .hautSection .droiteSec img {
+    height: 40vh;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .button {
+    width: 80%;
+  }
+}
+
+  </style>
+</section>
+
+        <section class="about-section containeri">
+  <div class="about-content">
+    <h2><span>À propos</span> de nous</h2>
+
+    <div class="about-grid">
+      <!-- Colonne gauche : texte -->
+      <div class="about-text">
+        <p>
+          Nous sommes une entreprise guidée par <span class="highlight">l'innovation</span> et portée par une vision ambitieuse :
+          transformer les idées en solutions concrètes. Grâce à une approche centrée sur l'humain, nous créons des expériences numériques performantes et accessibles.
+        </p>
+
+        <blockquote class="about-quote">
+          « L'innovation n'est pas une option, c'est notre culture. »
+        </blockquote>
+
+        <a href="#details" class="btn-more">En savoir plus</a>
+      </div>
+
+      <!-- Colonne droite : image -->
+      <!-- <div class="about-image">
+        <img style="width: 100%;height: 50vh;object-fit: cover;" src="/public/images/numeriques/cle.png" alt="Notre équipe" />
+      </div> -->
+    </div>
+
+    <!-- Slider simplifié -->
+    <div class="about-slider">
+      <div class="slide active">🌍 +30 pays desservis</div>
+      <div class="slide">👥 +50 experts passionnés</div>
+      <div class="slide">🚀 150+ projets livrés</div>
+    </div>
+  </div>
+</section>
+
+         
+
+         <section class="section1">
+         <style>
+    .section1 {
+      display: flex;
+      flex-direction:row-reverse;
+      flex-wrap: wrap;
+      width: 100%;
+      min-height: 90vh;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .gauche, .droite {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gauche {
+      gap: 3rem;
+    }
+
+    .droite {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .imgDroite {
+      width: 100%;
+      height: auto;
+      max-height: 90vh;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .section1 {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1.5rem;
+        margin:0;
+      }
+
+      .gauche, .droite {
+        width: 100%;
+      }
+
+      .imgDroite {
+        height: auto;
+        max-height: 60vh;
+      }
+    }
+         </style>
+
+         <!-- Partie gauche -->
+         <section class="gauche">
+         <article class="genz-slide">
+         <h2>Comment la Gen Z <span class="blue-text"> mate ses trucs</span></h2>
+         <ul class="slide-list">
+            <li><span class="highlight">•</span> Le contenu court domine : TikTok, Reels, YouTube Shorts.</li>
+            <li><span class="highlight">•</span> Privilégiez les expériences mobiles en premier.</li>
+            <li><span class="highlight">•</span> Engagement élevé avec du contenu interactif et gamifié.</li>
+            <li><span class="highlight">•</span> Privilégiez l'authenticité plutôt que le raffinement.</li>
+            <li><span class="highlight">•</span> Utiliser plusieurs écrans simultanément.</li>
+         </ul>
+         </article>
+         <article class="evolution-slide">
+      <h2>STREAMING <span class="blue-text">LANDSCAPE EVOLUTION</span></h2>
+      <ul class="slide-list">
+        <li><span class="highlight">•</span> D'une plateforme leader à un écosystème digital diversifié.</li>
+        <li><span class="highlight">•</span> Rise of ad-supported models (FAST, AVOD).</li>
+        <li><span class="highlight">•</span> Greater emphasis on niche content and personalization.</li>
+        <li><span class="highlight">•</span> Increased competition from social video platforms.</li>
+        <li><span class="highlight">•</span> Mergers and bundling strategies shaping the future.</li>
+      </ul>
+         </article>
+         </section>
+
+         <!-- Partie droite -->
+         <section class="droite bg">
+         <img style="width: 100%;height: 90vh;object-fit: cover;border-radius: 10px;" class="imgDroite" src="/public/images/numeriques/num_9a.png" alt="image">
+         </section>
+         </section>
+         <!-- SECTION: État actuel de la diffusion numérique -->
+<section class="streaming-state-section">
+  <div class="container-streaming">
+    <div class="state-header">
+      <div class="left">
+        <h2><span>État Actuel</span><br>de la Diffusion Numérique</h2>
+      </div>
+      <div class="right">
+        <p>
+          Le paysage du contenu numérique évolue rapidement. Notre plateforme
+          s'adapte en intégrant des modèles innovants, en étendant son accessibilité
+          et en enrichissant constamment l'expérience utilisateur.
+        </p>
+      </div>
+    </div>
+
+    <div class="state-grid">
+      <div class="state-card">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Adoption Massive</h3>
+        <p>
+          La diffusion numérique est devenue la norme pour consommer des contenus multimédias, dépassant les modèles traditionnels.
+        </p>
+      </div>
+      <div class="state-card">
+        <i class="fa-solid fa-coins"></i>
+        <h3>Modèles de Revenus Diversifiés</h3>
+        <p>
+          Offres freemium, abonnements, publicités ou options hybrides pour répondre à chaque utilisateur.
+        </p>
+      </div>
+      <div class="state-card">
+        <i class="fa-solid fa-globe"></i>
+        <h3>Expansion Internationale</h3>
+        <p>
+          Accessibilité mondiale via la localisation, la traduction multilingue et les contenus régionaux.
+        </p>
+      </div>
+      <div class="state-card">
+        <i class="fa-solid fa-layer-group"></i>
+        <h3>Contenu en Croissance</h3>
+        <p>
+          Déploiement constant de nouveaux contenus exclusifs pour fidéliser et capter l'attention des utilisateurs.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+         
+
+<!-- section technologie -->
+ <section class="tech-trends-section container">
+  <div class="tech-trends-content">
+    <div class="tech-text">
+      <h2><span class="blue-text">Technologies</span> émergentes</h2>
+      <p>
+        Les plateformes de streaming s'appuient désormais sur des <span class="highlight">technologies de pointe</span> pour offrir une expérience utilisateur plus immersive, personnalisée et efficace.
+      </p>
+      <ul class="tech-list">
+        <li><i class="fas fa-robot"></i> Intelligence artificielle pour les recommandations</li>
+        <li><i class="fas fa-vr-cardboard"></i> Réalité virtuelle pour des événements immersifs</li>
+        <li><i class="fas fa-cloud"></i> Cloud computing pour la scalabilité</li>
+        <li><i class="fas fa-lock"></i> Blockchain pour la gestion des droits d’auteur</li>
+      </ul>
+    </div>
+    <div class="tech-image">
+      <img src="/public/images/numeriques/nume_7.png" alt="Technologies du futur" />
+    </div>
+  </div>
+</section>
+
+<!-- La section services -->
+  <section class="services-section container-streamin">
+  <h2>Nos Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <h3><i class="fa-solid fa-lightbulb"></i> Conseil & Stratégie</h3>
+      <p>Nous vous accompagnons dans la définition de votre vision digitale et des solutions adaptées à vos besoins.</p>
+    </div>
+    <div class="service-card">
+      <h3><i class="fa-solid fa-code"></i> Développement Web</h3>
+      <p>Des applications web modernes, performantes et sur mesure, basées sur les dernières technologies.</p>
+    </div>
+    <div class="service-card">
+      <h3><i class="fa-solid fa-paint-brush"></i> Design UI/UX</h3>
+      <p>Des interfaces intuitives et esthétiques, pensées pour offrir la meilleure expérience utilisateur possible.</p>
+    </div>
+  </div>
+</section>
+<!-- Section Contact -->
+<section id="contact-section" class="contact-section container">
+  <h2><span>Contactez</span>-nous</h2>
+  <p>Une question, une collaboration ou un projet ? Parlons-en.</p>
+
+  <div class="contact-content">
+    <!-- ✅ Carte Google Maps -->
+    <div class="map-wrapper" aria-label="Localisation sur la carte">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9993272073553!2d2.2922926156740895!3d48.858373979287955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fce87cbe4fb%3A0xf456a6db2c7e8c0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1684237761319!5m2!1sfr!2sfr"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <!-- ✅ Formulaire -->
+    <div class="contact-form-wrapper">
+      <!-- Message de succès -->
+      <div id="form-success" class="form-success hidden" role="alert" aria-live="polite">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Merci ! Votre message a bien été envoyé.</span>
+        <button id="close-success" class="close-btn" aria-label="Fermer le message de succès">&times;</button>
+      </div>
+
+      <form id="contact-form" class="contact-form" action="https://formspree.io/f/xyzabcd" method="POST">
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Votre nom" required />
+          <input type="email" name="email" placeholder="Votre email" required />
+        </div>
+        <textarea name="message" rows="5" placeholder="Votre message..." required></textarea>
+        <button type="submit" class="btn-submit">
+  <i class="fa-solid fa-paper-plane icon-submit"></i> Envoyer le message
+</button>
+<audio id="send-sound" src="/public/music/click-sfx-287654.mp3" preload="auto"></audio>
+      </form>
+    </div>
+
+    
+  </div>
+</section>
+<!-- Section Témoignages -->
+<section style="scroll-behavior: smooth;" class="testimonials-section container">
+  <h2 class="section-title"><span>Témoignages</span> de nos utilisateurs</h2>
+  <p class="section-description">Découvrez ce que nos clients et partenaires disent de leur expérience avec notre plateforme de streaming.</p>
+
+  <div class="testimonials-grid">
+    <!-- Témoignage 1 -->
+    <div class="testimonial-card fade-in-up">
+      <a href="/public/images/clients/equipe.png" data-fancybox="gallery" data-caption="Camille D. - Directrice Marketing" class="testimonial-link">
+        <img src="/public/images/clients/equipe.png" alt="Camille D." class="testimonial-img" />
+      </a>
+      <blockquote class="testimonial-quote">“Une équipe à l'écoute, réactive et créative. Notre projet a pris une toute nouvelle dimension.”</blockquote>
+      <cite class="testimonial-author">Camille D. — Directrice Marketing</cite>
+    </div>
+
+    <!-- Témoignage 2 -->
+    <div class="testimonial-card fade-in-up" style="animation-delay: 0.2s">
+      <a href="/public/images/clients/client2.png" data-fancybox="gallery" data-caption="Yacine M. - CEO Startup" class="testimonial-link">
+        <img src="/public/images/clients/client2.png" alt="Yacine M." class="testimonial-img" />
+      </a>
+      <blockquote class="testimonial-quote">“Un accompagnement de qualité, avec une vraie sensibilité design. Bravo à toute l'équipe !”</blockquote>
+      <cite class="testimonial-author">Yacine M. — CEO, NovaTech</cite>
+    </div>
+
+    <!-- Témoignage 3 -->
+    <div class="testimonial-card fade-in-up" style="animation-delay: 0.4s">
+      <a href="/public/images/clients/client3.png" data-fancybox="gallery" data-caption="Sophie R. - Chargée de com." class="testimonial-link">
+        <img src="/public/images/clients/client3.png" alt="Sophie R." class="testimonial-img" />
+      </a>
+      <blockquote class="testimonial-quote">“Le résultat est au-delà de nos attentes. Professionnalisme, humain, et excellence.”</blockquote>
+      <cite class="testimonial-author">Sophie R. — Chargée de Communication</cite>
+    </div>
+  </div>
+</section>
+<!-- Section Partenaires -->
+<!-- Section Partenaires -->
+<section class="partners-section container">
+  <div class="partners-content">
+    <div class="partners-left">
+      <h2 class="section-title"><span>Nos</span> Partenaires</h2>
+      <p class="section-description">Nous sommes fiers de collaborer avec des entreprises leaders dans leurs domaines. Découvrez nos partenaires stratégiques.</p>
+      
+      <div class="partners-grid">
+        <!-- Partenaire 1 -->
+        <div class="partner-card">
+          <div class="partner-content">
+            <div class="partner-image">
+              <img src="/public/images/clients/equipe4.png" alt="Partenaire 1" class="partner-logo" />
+            </div>
+            <div class="partner-text">
+              <p class="partner-description">Une entreprise innovante dans le domaine de la technologie qui nous aide à offrir des services de qualité.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partenaire 2 -->
+        <div class="partner-card">
+          <div class="partner-content">
+            <div class="partner-image">
+              <img src="/public/images/clients/equipe.png" alt="Partenaire 2" class="partner-logo" />
+            </div>
+            <div class="partner-text">
+              <p class="partner-description">Spécialistes des solutions cloud, ils nous accompagnent dans la gestion de notre infrastructure technique.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partenaire 3 -->
+        <div class="partner-card">
+          <div class="partner-content">
+            <div class="partner-image">
+              <img src="/public/images/clients/client3.png" alt="Partenaire 3" class="partner-logo" />
+            </div>
+            <div class="partner-text">
+              <p class="partner-description">Une société de contenu créatif qui enrichit notre plateforme avec des vidéos captivantes et originales.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partenaire 4 -->
+        <div class="partner-card">
+          <div class="partner-content">
+            <div class="partner-image">
+              <img src="/public/images/partenaires/partenaire.png" alt="Partenaire 4" class="partner-logo" />
+            </div>
+            <div class="partner-text">
+              <p class="partner-description">Experts en sécurité numérique, ils garantissent la protection des données de nos utilisateurs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Partie droite avec la grande photo -->
+    <div class="partners-right">
+      <img src="/public/images/partenaires/RemoveBackground_133910452682159250.png" alt="Image des partenaires" class="partners-image" />
+    </div>
+  </div>
+</section>
+<!-- Section FAQ -->
+<section class="faq-section container genz-slide">
+  <h2 class="section-title"><span>Foire</span> aux questions</h2>
+  <p class="section-description">Retrouvez les réponses à vos questions fréquemment posées. Si vous avez d'autres interrogations, n'hésitez pas à nous contacter.</p>
+
+  <div class="faq-accordion">
+    <!-- Question 1 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Comment fonctionne votre plateforme ?
+      </button>
+      <div class="faq-answer">
+        <p>Notre plateforme offre une expérience de streaming de haute qualité avec une interface intuitive et un contenu accessible en streaming à tout moment et sur divers appareils.</p>
+      </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Quelles sont les options d'abonnement ?
+      </button>
+      <div class="faq-answer">
+        <p>Nous proposons plusieurs abonnements adaptés à vos besoins : mensuel, trimestriel ou annuel, pour vous permettre de choisir l'option la plus pratique et économique.</p>
+      </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Est-ce possible de télécharger du contenu ?
+      </button>
+      <div class="faq-answer">
+        <p>Oui, vous pouvez télécharger certains contenus pour les regarder sans connexion internet, idéal pour les déplacements ou les zones sans réseau.</p>
+      </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Quels appareils sont compatibles ?
+      </button>
+      <div class="faq-answer">
+        <p>Notre plateforme fonctionne sur une large gamme d'appareils : smartphones, tablettes, ordinateurs, télévisions intelligentes et appareils de streaming tels que Roku et Apple TV.</p>
+      </div>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="faq-item">
+      <button class="faq-question">
+        Comment annuler mon abonnement ?
+      </button>
+      <div class="faq-answer">
+        <p>Pour annuler votre abonnement, connectez-vous à votre compte et accédez à la section "Gérer mon abonnement". Si vous avez besoin d'aide, contactez notre support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section Nos Solutions pour Entreprises -->
+<section class="solutions-section container genz-slide">
+  <h2 class="section-title"><span>Nos</span> Solutions pour Entreprises</h2>
+  <p class="section-description">Nous offrons des solutions sur mesure pour aider les entreprises à diffuser des contenus, organiser des événements et optimiser leur communication interne via le streaming. Découvrez comment nous pouvons vous accompagner.</p>
+
+  <div class="solutions-grid">
+    <!-- Solution 1 -->
+    <div class="solution-card">
+      <div class="card-icon">
+        <i class="fas fa-broadcast-tower"></i>
+      </div>
+      <h3>Diffusion de Contenus</h3>
+      <p>Des outils puissants pour diffuser vos contenus en direct ou à la demande, à un large public, dans des environnements sécurisés et professionnels.</p>
+    </div>
+
+    <!-- Solution 2 -->
+    <div class="solution-card">
+      <div class="card-icon">
+        <i class="fas fa-calendar-alt"></i>
+      </div>
+      <h3>Organisation d'Événements</h3>
+      <p>Facilitez l'organisation de conférences, séminaires et autres événements en ligne avec des solutions de streaming interactives et de qualité.</p>
+    </div>
+
+    <!-- Solution 3 -->
+    <div class="solution-card">
+      <div class="card-icon">
+        <i class="fas fa-users"></i>
+      </div>
+      <h3>Communication Interne</h3>
+      <p>Optimisez la communication interne de votre entreprise en diffusant des réunions, des formations et des annonces à vos équipes de manière fluide et sécurisée.</p>
+    </div>
+  </div>
+</section>
+<!-- Section Actualités & Blog -->
+<!-- Section Actualités & Blog -->
+<section class="blog-section container">
+  <h2 class="section-title"><span>Actualités</span> & Blog</h2>
+  <p class="section-description">Restez à jour avec les dernières tendances, mises à jour de la plateforme et études de cas dans le monde du streaming.</p>
+
+  <div class="blog-grid">
+    <!-- Article 1 -->
+    <div class="blog-card">
+      <img src="/public/images/numeriques/avenir.jpeg" alt="Tendance du Streaming 2025" class="blog-img" />
+      <div class="blog-content">
+        <h3><a href="/blog/tendance-streaming-2025" class="blog-title">Tendance du Streaming en 2025 : Ce que l'avenir nous réserve</a></h3>
+        <p class="blog-excerpt">Le streaming évolue rapidement, et les tendances émergentes façonnent l'avenir de cette industrie. Découvrez les innovations technologiques qui transformeront l'expérience utilisateur...</p>
+        <a href="/blog/tendance-streaming-2025" class="read-more">Lire la suite</a>
+      </div>
+    </div>
+
+    <!-- Article 2 -->
+    <div class="blog-card">
+      <img src="/public/images/numeriques/Search concept for landing page _ Free Vector….jpeg" alt="Mises à jour de notre plateforme" class="blog-img" />
+      <div class="blog-content">
+        <h3><a href="/blog/mises-a-jour-plateforme" class="blog-title">Mises à jour récentes de notre plateforme</a></h3>
+        <p class="blog-excerpt">Nous avons récemment lancé plusieurs nouvelles fonctionnalités pour améliorer votre expérience. Apprenez-en plus sur ce qui a changé et comment cela va simplifier vos événements en streaming...</p>
+        <a href="/blog/mises-a-jour-plateforme" class="read-more">Lire la suite</a>
+      </div>
+    </div>
+
+    <!-- Article 3 -->
+    <div class="blog-card">
+      <img src="/public/images/numeriques/5b654e2b-51f9-4c78-8a3f-a80789f18a4a.jpeg" alt="Étude de cas: Événement en Streaming Réussi" class="blog-img" />
+      <div class="blog-content">
+        <h3><a href="/blog/etude-de-cas-evenement" class="blog-title">Étude de Cas : Comment un événement en streaming a changé la donne</a></h3>
+        <p class="blog-excerpt">Lisez notre étude de cas sur un événement d'entreprise majeur qui a été diffusé en streaming avec notre plateforme. Découvrez les défis rencontrés et les résultats obtenus...</p>
+        <a href="/blog/etude-de-cas-evenement" class="read-more">Lire la suite</a>
+      </div>
+    </div>
+
+    <!-- Article 4 -->
+    <div class="blog-card">
+      <img src="/public/images/numeriques/6ed38fb0-2c8e-4ee5-858d-b2b6f03deb85.jpeg" alt="Entretien avec un expert du secteur" class="blog-img" />
+      <div class="blog-content">
+        <h3><a href="/blog/entretien-expert-streaming" class="blog-title">Entretien avec un expert du secteur du streaming</a></h3>
+        <p class="blog-excerpt">Nous avons eu l'opportunité de discuter avec un expert du secteur du streaming. Découvrez ses insights sur l'avenir du contenu en direct et les technologies de diffusion de demain...</p>
+        <a href="/blog/entretien-expert-streaming" class="read-more">Lire la suite</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section Témoignages -->
+<section class="testimonials-section container " style="display: none;">
+  <h2 class="section-title"><span>Témoignages</span> de nos utilisateurs</h2>
+  <p class="section-description">Découvrez ce que nos clients et partenaires disent de leur expérience avec notre plateforme de streaming.</p>
+
+  <div class="testimonials-grid">
+    <!-- Témoignage 1 -->
+    <div class="testimonial-card">
+      <img src="/public/images/numeriques/4b7c54a8-c8d9-48ec-b07b-54ef9dbdaf36.jpeg" alt="Client 1" class="testimonial-img" />
+      <div class="testimonial-content">
+        <p class="testimonial-quote">"Grâce à cette plateforme, nous avons pu diffuser notre événement en direct à un large public, avec une qualité de streaming exceptionnelle. Nos participants étaient ravis!"</p>
+        <p class="testimonial-author">Jean Dupont, CEO de Tech Innovators</p>
+      </div>
+    </div>
+
+    <!-- Témoignage 2 -->
+    <div class="testimonial-card">
+      <img src="/public/images/numeriques/user2.jpg" alt="Client 2" class="testimonial-img" />
+      <div class="testimonial-content">
+        <p class="testimonial-quote">"La plateforme est intuitive et facile à utiliser. Nous avons pu organiser notre conférence virtuelle sans accroc. L'interface est fluide et professionnelle!"</p>
+        <p class="testimonial-author">Sophie Martin, Directrice Marketing chez Startup zoumaldrwing</p>
+      </div>
+    </div>
+
+    <!-- Témoignage 3 -->
+    <div class="testimonial-card">
+      <img src="/public/images/numeriques/user3.jpg" alt="Client 3" class="testimonial-img" />
+      <div class="testimonial-content">
+        <p class="testimonial-quote">"Une solution de streaming robuste et fiable, parfaite pour nos besoins en direct. La qualité et la gestion des flux sont impressionnantes!"</p>
+        <p class="testimonial-author">Marc Lefevre, Responsable Communication chez CorpTech</p>
+      </div>
+    </div>
+    <!-- Témoignage vidéo YouTube -->
+<div class="testimonial-card fade-in-up" style="animation-delay: 0.6s">
+  <a
+    data-fancybox="gallery"
+    data-caption="Interview de client sur YouTube"
+    href="/public/videos/mixkit-people-having-a-work-meeting-around-a-table-4547-hd-ready.mp4"
+    class="testimonial-link"
+  >
+    <img src="/public/videos/mixkit-people-having-a-work-meeting-around-a-table-4547-hd-ready.mp4" alt="Vidéo YouTube" class="testimonial-img" />
+  </a>
+  <blockquote class="testimonial-quote">“Découvrez en vidéo comment Ginyard transforme des idées en succès.”</blockquote>
+  <cite class="testimonial-author">Témoignage YouTube</cite>
+</div>
+
+<!-- Témoignage vidéo Vimeo -->
+<div class="testimonial-card fade-in-up" style="animation-delay: 0.8s">
+  <a
+    data-fancybox="gallery"
+    data-caption="Vidéo Vimeo - Présentation entreprise"
+    href="/public/videos/watermarked_preview.mp4"
+    class="testimonial-link"
+  >
+    <img src="/public/videos/watermarked_preview.mp4" alt="Vidéo Vimeo" class="testimonial-img" />
+  </a>
+  <blockquote class="testimonial-quote">“Une immersion dans notre univers avec Vimeo.”</blockquote>
+  <cite class="testimonial-author">Vidéo Vimeo</cite>
+</div>
+
+<!-- Témoignage vidéo MP4 locale -->
+<div class="testimonial-card fade-in-up" style="animation-delay: 1s">
+  <a
+    data-fancybox
+    data-caption="Vidéo MP4 locale - Démo"
+    href="/public/videos/mixkit-people-having-a-work-meeting-around-a-table-4547-hd-ready.mp4"
+  >
+    <!-- <img src="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217" alt="Démo vidéo locale" class="testimonial-img" /> -->
+    <video src="/public/videos/0_Stream_Gaming_1080x1080.mp4.crdownload"></video>
+  </a>
+  <blockquote class="testimonial-quote">“Regardez cette démonstration fluide en MP4 natif.”</blockquote>
+  <cite class="testimonial-author">Vidéo MP4</cite>
+</div>
+
+  </div>
+</section>
+<!-- Section Nos Projets -->
+<section class="projects-section container">
+  <h2 class="section-title"><span>Nos</span> Projets</h2>
+  <p class="section-description">Explorez nos projets en cours et ceux à venir. Chaque initiative reflète notre engagement à transformer le paysage du streaming et de la communication numérique.</p>
+
+  <div class="projects-grid">
+    <!-- Projet 1 -->
+    <div class="project-card">
+      <img src="/public/images/numeriques/e55dcd2b-d92d-4ebb-b418-34dd2ad3ea8a.jpeg" alt="AI Streaming Project" class="project-img" />
+      <div class="project-content">
+        <h3 class="project-title">Streaming alimenté par l'IA</h3>
+        <p class="project-description">Nous développons une technologie de streaming intelligente, intégrant de l’IA pour personnaliser l’expérience utilisateur en temps réel.</p>
+      </div>
+    </div>
+
+    <!-- Projet 2 -->
+    <div class="project-card">
+      <img src="/public/images/numeriques/Comment finaliser une charte informatique et une….jpeg" alt="Virtual Events Platform" class="project-img" />
+      <div class="project-content">
+        <h3 class="project-title">Plateforme d'Événements Virtuels</h3>
+        <p class="project-description">Un nouveau module dédié aux conférences hybrides et salons virtuels avec une interaction fluide, immersive et accessible.</p>
+      </div>
+    </div>
+
+    <!-- Projet 3 -->
+    <div class="project-card">
+      <img src="/public/images/numeriques/Enhance DevOps Efficiency with Callgoose….jpeg" alt="Streaming pour l'Éducation" class="project-img" />
+      <div class="project-content">
+        <h3 class="project-title">Streaming pour l'Éducation</h3>
+        <p class="project-description">Nous collaborons avec des institutions éducatives pour offrir des solutions de cours en direct, adaptés à tous types d’apprenants.</p>
+      </div>
+    </div>
+
+    <!-- Projet 4 -->
+    <div class="project-card">
+      <img src="/public/images/numeriques/d7d777bc-a3de-428d-b53e-741dfab316f0.jpeg" alt="Lab Innovation" class="project-img" />
+      <div class="project-content">
+        <h3 class="project-title">Futur Lab</h3>
+        <p class="project-description">Un espace de recherche et développement où nous explorons les futures technologies de diffusion : 5G, VR, réalité mixte...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h1>Jacob zouma</h1>
+
+
+  
+
+
+      </main>
+
+      <footer>
+        <button onclick="nextSlide()" class="next-button">Next Slide</button>
+      </footer>
+    </div>
+
+   
+
+    <!-- Le fichier javascript principal -->
+    <!-- <script src="/src/js/principal.js"></script> -->
+    <script src="/client/src/js/principal.js"></script>
+
+    <script>
+  const slides = document.querySelectorAll(".slide");
+  let current = 0;
+
+  setInterval(() => {
+    slides[current].classList.remove("active");
+    current = (current + 1) % slides.length;
+    slides[current].classList.add("active");
+  }, 3000);
+</script>
+<!-- message -->
+ <script>
+  const form = document.getElementById("contact-form");
+  const successMsg = document.getElementById("form-success");
+  const closeBtn = document.getElementById("close-success");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (response.ok) {
+      form.reset();
+      successMsg.classList.remove("hidden");
+    } else {
+      alert("Erreur. Veuillez réessayer.");
+    }
+  });
+
+  closeBtn.addEventListener("click", () => {
+    successMsg.classList.add("hidden");
+  });
+</script>
+
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const btnSubmit = document.querySelector('.btn-submit');
+    const sound = document.getElementById('send-sound');
+
+    btnSubmit.addEventListener('click', () => {
+      btnSubmit.classList.add('clicked');
+      sound.currentTime = 0;
+      sound.play();
+
+      setTimeout(() => {
+        btnSubmit.classList.remove('clicked');
+      }, 600);
+    });
+  });
+
+  btnSubmit.addEventListener('click', (event) => {
+  event.preventDefault(); // si tu veux tester sans envoyer le formulaire
+  btnSubmit.classList.add('clicked');
+  sound.currentTime = 0;
+  sound.play();
+
+  setTimeout(() => {
+    btnSubmit.classList.remove('clicked');
+    // Si tu veux quand même envoyer :
+    // btnSubmit.closest('form').submit();
+  }, 600);
+});
+
+</script>
+<!-- fancybox -->
+ <!-- Fancybox JS -->
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+<script>
+  // Initialisation de Fancybox (optionnel si tu veux ajouter des effets personnalisés)
+  Fancybox.bind("[data-fancybox='gallery']", {
+    animated: true,
+    showClass: "fancybox-zoomIn",
+    hideClass: "fancybox-zoomOut",
+    dragToClose: false,
+    Images: {
+      zoom: true,
+    },
+    Thumbs: {
+      autoStart: true,
+    },
+  });
+</script>
+</div>
+<script type="module" src="/src/main.jsx"></script>
+ <!-- JS de la page principale -->
+ <script src="/src/js/principal.js" type="module"></script>
   </body>
 </html>
+

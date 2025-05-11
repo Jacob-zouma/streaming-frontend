@@ -26,3 +26,17 @@ dist-ssr
 
 # env
 .env
+
+# node modules
+node_modules/
+
+# environnement
+.env
+
+# build output
+dist/
+build/
+
+# système
+.DS_Store
+*.log
